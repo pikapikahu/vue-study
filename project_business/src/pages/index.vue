@@ -24,13 +24,33 @@
       </div>
     </div>
     <div class="index-right">
-
+      <div class="index-board-list">
+        <div class="index-board-item" v-for="(item, index) in boardList"
+          :class="[{'line-last' : index % 2 !== 0}, 'index-board-' + item.id]"
+        >
+          <div class="index-board-item-inner">
+            <h2>{{item.title}}</h2>
+            <p>{{item.description}}</p>
+            <div class="index-board-button">
+              <a href="" class="button">立即购买</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
   export default {
+    created: function () {
+      this.$http.get('api/getNewsList')
+        .then((res) => {
+          console.log(res)
+        }, (err) => {
+          console.log(err)
+        })
+    },
     data () {
       return {
         invTime: 2000,
@@ -170,5 +190,15 @@
   .index-board-list{overflow:hidden}
   .index-board-item{float:left;width 400px;background #fff;box-shadow 0 0 1px #ddd;padding 20px;margin-right 20px;margin-bottom 20px}
   .index-board-item-inner{min-height: 125px;padding-left 120px}
+  .index-board-car .index-board-item-inner{ background: url('../assets/images/1.png') no-repeat}
+  .index-board-loud .index-board-item-inner{ background: url('../assets/images/2.png') no-repeat}
+  .index-board-earth .index-board-item-inner{ background: url('../assets/images/3.png') no-repeat}
+  .index-board-hill .index-board-item-inner{ background: url('../assets/images/4.png') no-repeat}
+  .index-board-item h2{font-size:18px;font-weight bold;color #000;margin-bottom 15px}
+  .line-last{margin-right:0}
+  .index-board-button{margin-top:20px}
+  .lastest-news{min-height: 512px}
+  .new-item{display:inline-block;width 230px;overflow hidden;text-overflow ellipsis;white-space nowrap}
   .hot-tag{background:red;color #fff}
+  .button{background:#4fc08d; color #fff;display inline-block;padding 10px 20px;cursor pointer}
 </style>
