@@ -18,12 +18,13 @@
         <h2>最新消息</h2>
         <ul>
           <li v-for="item in newsList">
-            <a :href="item.url">{{item.title}}</a>
+            <a :href="item.url" class="new-item">{{item.title}}</a>
           </li>
         </ul>
       </div>
     </div>
     <div class="index-right">
+      <slide-show :slides="slides" :inv="invTime"></slide-show>
       <div class="index-board-list">
         <div class="index-board-item" v-for="(item, index) in boardList"
           :class="[{'line-last' : index % 2 !== 0}, 'index-board-' + item.id]"
@@ -42,11 +43,15 @@
 </template>
 
 <script>
+  import slideShow from '../components/slideShow'
   export default {
+    components: {
+      slideShow
+    },
     created: function () {
       this.$http.get('api/getNewsList')
         .then((res) => {
-          console.log(res)
+          this.newsList = res.body
         }, (err) => {
           console.log(err)
         })
@@ -106,25 +111,7 @@
             saleout: false
           }
         ],
-        newsList: [
-          {
-            title: '数据统计',
-            url: 'http://starcraft.com'
-          },
-          {
-            title: '数据预测',
-            url: 'http://warcraft.com'
-          },
-          {
-            title: '流量分析',
-            url: 'http://overwatch.com',
-            hot: true
-          },
-          {
-            title: '广告发布',
-            url: 'http://hearstone.com'
-          }
-        ],
+        newsList: [ ],
         productList: {
           pc: {
             title: 'PC产品',
