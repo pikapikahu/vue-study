@@ -2,7 +2,9 @@
   <div>
     <div class="app-head">
       <div class="app-head-inner">
-        <img src="../assets/logo.png">
+        <router-link :to="{path:'/'}">
+          <img src="../assets/logo.png">
+        </router-link>
         <div class="head-nav">
           <ul class="nav-list">
             <li>{{ username }}</li>
@@ -10,7 +12,7 @@
             <li v-if="username!== ''">退出</li>
             <li v-if="username=== ''" @click="logClick">登录</li>
             <li class="nav-pile">|</li>
-            <li @click="regClick" v-if="username=== ''">注册</li>
+            <li @click="regClick" v-if="username=== ''" >注册</li>
             <li class="nav-pile" v-if="username=== ''">|</li>
             <li @click="aboutClick">关于</li>
           </ul>
@@ -81,6 +83,32 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+  html, body, div, span, applet, object, iframe,
+  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+  a, abbr, acronym, address, big, cite, code,
+  del, dfn, em, img, ins, kbd, q, s, samp,
+  small, strike, strong, sub, sup, tt, var,
+  b, u, i, center,
+  dl, dt, dd, ol, ul, li,
+  fieldset, form, label, legend,
+  table, caption, tbody, tfoot, thead, tr, th, td,
+  article, aside, canvas, details, embed,
+  figure, figcaption, footer, header, hgroup,
+  menu, nav, output, ruby, section, summary,
+  time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+  }
+  body {
+    background: #f0f2f5;
+    font-family: "Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+    font-size: 14px;
+    color: #444;
+  }
   .app-head {background:#363636;color:#b2b2b2;height: 90px;line-height: 90px;width: 100%}
   .app-head-inner{width:1200px;margin: 0 auto}
   .head-logo{float: left}
